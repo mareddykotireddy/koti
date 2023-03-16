@@ -41,75 +41,77 @@ const Sku = () => {
     localStorage.setItem('selectedClient', value);
   };
 <Input.search placeholder="search here..."   style={{ width: 200, float: 'right', margin: '10px' }}/>
-  const columns = [
-    // {
-    //   title: 'skuid',
-    //   dataIndex: 'skuid',
-    //   key: '1',
-    //   // render: (record) => {
-    //   //   <p>{record?.skuid}</p>
-    //   // }
-    // },
+const columns = [
+  {
+    title: 'sku1',
+    dataIndex: 'sku1',
+    key: '2',
+    sorter: (a, b) => a.sku1.localeCompare(b.sku1),
+  },
+  {
+    title: 'description',
+    dataIndex: 'description',
+    key: '3',
+    sorter: (a, b) => a.description.localeCompare(b.description),
+  },
+  {
+    title: 'purchasecost',
+    dataIndex: 'purchasecost',
+    key: '4',
+    sorter: (a, b) => a.purchasecost - b.purchasecost,
+  },
+  {
+    title: 'itemtype',
+    dataIndex: 'itemtype',
+    key: '5',
+    sorter: (a, b) => a.itemtype.localeCompare(b.itemtype),
+    render: (_, { itemtype }) => {
+      let color = 'green'; // Set color to green
+      let tags = itemtype ? itemtype.toUpperCase() : ''; // Convert itemtype to uppercase or set an empty string if it's null
+      return (
+        <Tag color={color} key={tags}>
+          {tags}
+        </Tag>
+      );
+    },
+  },
+  {
+    title: 'status',
+    dataIndex: 'status',
+    key: '6',
+    sorter: (a, b) => a.status.localeCompare(b.status),
+    render: (_, { status }) => {
+      let color = 'green'; 
+      let tags = status ? status.toUpperCase() : '';
+      return (
+        <Tag color={color} key={tags}>
+          {tags}
+        </Tag>
+      );
+    },
+  },
+  {
+    title: 'entrydate',
+    dataIndex: 'entrydate',
+    key: '7',
+    render: (text) => moment(text).format('MM/DD/YYYY'),
+    sorter: (a, b) => moment(a.entrydate).diff(moment(b.entrydate)),
+  },
+];
 
-    {
-      title: 'sku1',
-      dataIndex: 'sku1',
-      key: '2',
-    },
-    {
-      title: 'description',
-      dataIndex: 'description',
-      key: '3',
-    },
-    {
-      title: 'purchasecost',
-      dataIndex: 'purchasecost',
-      key: '4',
-    },
-    {
-      title: 'itemtype',
-      dataIndex: 'itemtype',
-      key: '5',
-      render: (_, { itemtype }) => {
-        let color = 'green'; // Set color to green
-        let tags = itemtype ? itemtype.toUpperCase() : ''; // Convert itemtype to uppercase or set an empty string if it's null
-        return (
-          <Tag color={color} key={tags}>
-            {tags}
-          </Tag>
-        );
-      },
-    },
-
-    {
-      title: 'status',
-      dataIndex: 'status',
-      key: '6',
-      render: (_, { status }) => {
-        let color = 'green'; 
-        let tags = status ? status.toUpperCase() : '';
-        return (
-          <Tag color={color} key={tags}>
-            {tags}
-          </Tag>
-        );
-      },
-    },
-
-    {
-      title: 'entrydate',
-      dataIndex: 'entrydate',
-      key: '7',
-      render: (text) => moment(text).format('MM/DD/YYYY'),
-    },
-  ];
 
   return (
     <div>
       <input type="text" value={clientId} onChange={(e) => handleClientIdChange(e.target.value)} />
-      <Table dataSource={skus} columns={columns} loading={isLoading ? <Spin size="large" /> : false} />
+      <Table
+  dataSource={skus}
+  columns={columns}
+  loading={isLoading ? <Spin size="large" /> : false}
+  sorter={true}
+/>
+
     </div>
   );
 }
 
-export default Sku;
+export default Sku

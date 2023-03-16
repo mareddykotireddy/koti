@@ -28,7 +28,7 @@ function Dropdown() {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [token]);
 
   useEffect(() => {
     if (!selectedClient) {
@@ -61,7 +61,7 @@ function Dropdown() {
   }, [selectedClient]);
 
   return (
-    <div style={{ marginTop: '-15px', width: '200px' }}>
+    <div style={{ marginTop: '-15px', width: '198px' }}>
       <select
         value={selectedClient}
         onChange={(event) => setSelectedClient(event.target.value)}

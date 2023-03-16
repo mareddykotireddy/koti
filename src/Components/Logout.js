@@ -20,9 +20,9 @@ const Logout = () => {
             top: 22,
             right: 10,
             color: 'white',
-            backgroundColor: 'black',
-            padding: '0px 0px',
-            borderRadius: '5px',
+            backgroundColor: 'Blue',
+            padding: '10px',
+            borderRadius: '9px',
           }}
           onClick={handleLogout}
         >
